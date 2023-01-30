@@ -43,7 +43,7 @@ namespace Service.Services
         {
             var dbProduct = await _repo.Get(id);
 
-            _mapper.Map(dbProduct, product);
+            _mapper.Map(product, dbProduct);
 
             await _repo.Update(dbProduct);
         }
@@ -65,9 +65,11 @@ namespace Service.Services
             return _mapper.Map<List<ProductListDto>>(searchDatas);
         }
 
-        public async Task<Product> GetById(int id)
+        public async Task<ProductGetDto> GetByIdAsync(int id)
         {
-            return await _repo.Get(id);
+            var mappedProduct =  _mapper.Map<ProductGetDto>(await _repo.Get(id));
+
+            return mappedProduct;
         }
     }
 }

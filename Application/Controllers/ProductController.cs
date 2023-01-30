@@ -84,7 +84,7 @@ namespace Application.Controllers
         [HttpGet]
         public async Task<IActionResult> Get([Required] int id)
         {
-            return Ok(await _productService.GetById(id));
+            return Ok(await _productService.GetByIdAsync(id));
         }
     }
 }

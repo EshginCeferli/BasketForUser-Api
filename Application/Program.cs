@@ -79,8 +79,6 @@ internal class Program
 
 
 
-
-
         var app = builder.Build();
 
         // Configure the HTTP request pipeline.
@@ -90,7 +88,6 @@ internal class Program
             app.UseSwaggerUI();
         }
         app.UseCors();
-
     
 
         app.UseHttpsRedirection();

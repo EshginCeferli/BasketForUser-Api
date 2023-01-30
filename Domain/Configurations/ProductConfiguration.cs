@@ -12,7 +12,7 @@ namespace Domain.Configurations
             builder.Property(m => m.Count).IsRequired();
             builder.Property(m => m.Price).IsRequired().HasPrecision(10, 8);
             builder.Property(m => m.SoftDeleted).HasDefaultValue(false);
-            builder.Property(m => m.CreateDate).HasDefaultValue(DateTime.UtcNow);
+            builder.Property(m => m.CreateDate).HasDefaultValue(DateTime.UtcNow.ToLongDateString());
 
             builder.HasQueryFilter(m => !m.SoftDeleted);
         }

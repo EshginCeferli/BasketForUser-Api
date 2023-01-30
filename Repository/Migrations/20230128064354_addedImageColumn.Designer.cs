@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Repository.Data;
 
@@ -11,9 +12,10 @@ using Repository.Data;
 namespace Repository.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230128064354_addedImageColumn")]
+    partial class addedImageColumn
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -98,11 +100,10 @@ namespace Repository.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("CreateDate")
-                        .IsRequired()
+                    b.Property<DateTime>("CreateDate")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(max)")
-                        .HasDefaultValue("01/29/2023 18:22:57");
+                        .HasColumnType("datetime2")
+                        .HasDefaultValue(new DateTime(2023, 1, 28, 6, 43, 53, 941, DateTimeKind.Utc).AddTicks(6951));
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -133,11 +134,10 @@ namespace Repository.Migrations
                     b.Property<int>("Count")
                         .HasColumnType("int");
 
-                    b.Property<string>("CreateDate")
-                        .IsRequired()
+                    b.Property<DateTime>("CreateDate")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(max)")
-                        .HasDefaultValue("Sunday, January 29, 2023");
+                        .HasColumnType("datetime2")
+                        .HasDefaultValue(new DateTime(2023, 1, 28, 6, 43, 53, 940, DateTimeKind.Utc).AddTicks(4098));
 
                     b.Property<byte[]>("Image")
                         .IsRequired()

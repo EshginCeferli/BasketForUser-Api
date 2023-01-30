@@ -9,9 +9,10 @@ namespace Service.Services.Mappings
     {
         public MappingProfile()
         {
-            CreateMap<ProductCreateDto, Product>();
-            CreateMap<Product, ProductListDto>();
+            CreateMap<ProductCreateDto, Product>().ReverseMap();
+            CreateMap<ProductListDto, Product>().ReverseMap();
             CreateMap<ProductUpdateDto, Product>().ReverseMap();
+            CreateMap<ProductGetDto, Product>().ReverseMap();
 
 
             CreateMap<RegisterDto, AppUser>().ReverseMap();

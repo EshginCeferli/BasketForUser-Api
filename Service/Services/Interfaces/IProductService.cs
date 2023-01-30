@@ -11,6 +11,6 @@ namespace Service.Services.Interfaces
         Task SoftDeleteAsync(int id);
         Task UpdateAsync(int id, ProductUpdateDto product);
         Task<List<ProductListDto>> SearchAsync(string? searchText);
-        Task<Product> GetById(int id);
+        Task<ProductGetDto> GetByIdAsync(int id);
     }
 }

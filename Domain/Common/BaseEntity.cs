@@ -4,7 +4,7 @@
     {
         public int Id { get; set; }
         public bool SoftDeleted { get; set; }
-        public DateTime CreateDate { get; set; }
+        public string CreateDate { get; set; }
 
     }
 }
