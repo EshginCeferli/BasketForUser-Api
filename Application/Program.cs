@@ -30,7 +30,9 @@ internal class Program
             options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
         });
 
+
         builder.Services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
+        builder.Services.AddHttpContextAccessor();
 
         JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear(); // => remove default claims
         builder.Services
@@ -69,11 +71,13 @@ internal class Program
 
         builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
-
         builder.Services.AddScoped<IProductRepository, ProductRepository>();
 
         builder.Services.AddScoped<IProductService, ProductService>();
 
+        builder.Services.AddScoped<IBasketRepository, BasketRepository>();
+
+        builder.Services.AddScoped<IBasketService, BasketService>();
 
         builder.Services.AddScoped<IAccountService, AccountService>();
 

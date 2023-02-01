@@ -19,6 +19,9 @@ namespace Repository.Data
             modelBuilder.ApplyConfiguration(new CategoryConfiguration());
             base.OnModelCreating(modelBuilder);
 
+            modelBuilder.ApplyConfiguration(new BasketProductConfiguration());
+            base.OnModelCreating(modelBuilder);
+
         }
     }
 }
