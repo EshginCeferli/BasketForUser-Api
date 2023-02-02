@@ -15,15 +15,13 @@ namespace Repository.Repositories
     public class BasketRepository : Repository<Basket>, IBasketRepository
     {
         private readonly AppDbContext _context;
-        private readonly DbSet<Basket> _entities;
+        private readonly DbSet<Basket> _entities;      
         private readonly IHttpContextAccessor _httpContextAccessor;
-
-
 
         public BasketRepository(AppDbContext context, IHttpContextAccessor httpContextAccessor) : base(context)
         {
             _context = context;
-            _entities = _context.Set<Basket>();
+            _entities = _context.Set<Basket>();          
             _httpContextAccessor = httpContextAccessor;
         }
 
@@ -41,6 +39,7 @@ namespace Repository.Repositories
 
             var basket = await _entities
                 .Include(m => m.BasketProducts)
+                .Include(m => m.AppUser)
                 .FirstOrDefaultAsync(m => m.AppUserId == userId);
 
             if (basket == null)
@@ -56,7 +55,7 @@ namespace Repository.Repositories
 
 
             var basketProduct = basket.BasketProducts
-                .FirstOrDefault(bp => bp.BasketId == basket.Id);
+                .FirstOrDefault(bp => bp.ProductId == id && bp.BasketId == basket.Id);
 
             if (basketProduct != null)
             {
@@ -82,18 +81,20 @@ namespace Repository.Repositories
 
             if (user == null) throw new UnauthorizedAccessException();
 
-            //var userId = user.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            var userId = "4c3af473-207b-4030-8431-0796f1286d6a";
+            var userId = user.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            //var userId = "4c3af473-207b-4030-8431-0796f1286d6a";
 
 
             if (userId == null) throw new UnauthorizedAccessException();
 
 
             var basket = await _entities
-                .Include(m => m.BasketProducts)
+                .Include(m => m.BasketProducts)     
+                .ThenInclude(m => m.Product)
                 .FirstOrDefaultAsync(m => m.AppUserId == userId);
 
             var basketProducts = basket.BasketProducts;
+                
 
             return basketProducts;
         }

@@ -23,5 +23,10 @@ namespace Repository.Data
             base.OnModelCreating(modelBuilder);
 
         }
+
+
+
+
+
     }
 }

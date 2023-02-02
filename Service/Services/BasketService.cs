@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Domain.Entities;
 using Repository.Repositories.Interfaces;
+using Service.Services.DTOs.Basket;
 using Service.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -25,9 +26,10 @@ namespace Service.Services
             await _repo.AddBasketAsync(id);
         }
 
-        public async Task<List<BasketProduct>> GetBasketProducts()
+        public async Task<List<BasketProductListDto>> GetBasketProducts()
         {
-            return await _repo.GetBasketProducts();
+            var basketProducts = await _repo.GetBasketProducts();
+            return _mapper.Map<List<BasketProductListDto>>(basketProducts);
         }
     }
 }

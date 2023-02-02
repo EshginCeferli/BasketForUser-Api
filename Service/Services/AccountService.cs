@@ -13,7 +13,7 @@ namespace Service.Services
 {
     public class AccountService : IAccountService
     {
-        private readonly UserManager<AppUser> _userManager;
+        private readonly UserManager<AppUser> _userManager;  
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IMapper _mapper;
         private readonly IConfiguration _config;
@@ -35,6 +35,8 @@ namespace Service.Services
         {
             var dbUser = await _userManager.FindByEmailAsync(model.Email);
 
+            if (dbUser is null) return null;
+
             if (!await _userManager.CheckPasswordAsync(dbUser, model.Password))
                 return null;
 
@@ -42,7 +44,7 @@ namespace Service.Services
             var roles = await _userManager.GetRolesAsync(dbUser);
 
 
-            return GenerateJwtToken(dbUser.UserName, (List<string>)roles);
+            return GenerateJwtToken(dbUser.UserName, dbUser.Id,(List<string>)roles);
         }
 
         public async Task<ApiResponse> RegisterAsync(RegisterDto model)
@@ -67,11 +69,12 @@ namespace Service.Services
 
         }
 
-        private string GenerateJwtToken(string username, List<string> roles)
+        private string GenerateJwtToken(string username, string userId, List<string> roles)
         {
             var claims = new List<Claim>
         {
             new Claim(JwtRegisteredClaimNames.Sub, username),
+            new Claim(JwtRegisteredClaimNames.Sub, userId),
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
             new Claim(ClaimTypes.NameIdentifier, username)
         };

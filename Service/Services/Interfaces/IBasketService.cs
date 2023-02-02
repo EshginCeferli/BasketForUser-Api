@@ -1,4 +1,5 @@
 ﻿using Domain.Entities;
+using Service.Services.DTOs.Basket;
 using Service.Services.DTOs.Product;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,7 @@ namespace Service.Services.Interfaces
     public interface IBasketService
     {
         Task AddBasketAsync(int id);
-        Task<List<BasketProduct>> GetBasketProducts();
+        Task<List<BasketProductListDto>> GetBasketProducts();
     }
 }
+    

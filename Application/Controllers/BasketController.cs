@@ -2,6 +2,7 @@
 using Service.Services.DTOs.Product;
 using Service.Services;
 using Service.Services.Interfaces;
+using System.ComponentModel.DataAnnotations;
 
 namespace Application.Controllers
 {
@@ -15,7 +16,7 @@ namespace Application.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddBasket(int id)
+        public async Task<IActionResult> AddBasket([Required][FromQuery]int id)
         {
             await _basketService.AddBasketAsync(id);
             return Ok();
@@ -23,8 +24,7 @@ namespace Application.Controllers
 
         [HttpGet]
         public async Task<IActionResult> GetBasketProducts()
-        {
-          
+        {          
             return Ok( await _basketService.GetBasketProducts());
         }
     }

@@ -11,6 +11,8 @@ using Service.Services.Interfaces;
 using Service.Services.Mappings;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
+using System.Text.Json.Serialization;
+
 
 internal class Program
 {
@@ -20,7 +22,7 @@ internal class Program
 
         // Add services to the container.
 
-        builder.Services.AddControllers();
+       
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
@@ -32,7 +34,25 @@ internal class Program
 
 
         builder.Services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
+
         builder.Services.AddHttpContextAccessor();
+
+        //builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+        builder.Services.AddMemoryCache();
+        builder.Services.AddDistributedMemoryCache();
+        builder.Services.AddSession();
+        //builder.Services.AddHttpContextAccessor();
+     
+
+        var authBuilder = builder.Services.AddAuthentication("CookieAuth");
+        authBuilder.AddCookie("CookieAuth", options =>
+        {
+            options.Cookie.Name = "CookieAuth";
+        });
+
+        builder.Services.AddControllers().AddJsonOptions(x =>
+                x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
         JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear(); // => remove default claims
         builder.Services
@@ -51,7 +71,10 @@ internal class Program
                     ValidIssuer = builder.Configuration["Jwt:Issuer"],
                     ValidAudience = builder.Configuration["Jwt:Audience"],
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"])),
-                    ClockSkew = TimeSpan.Zero // remove delay of token when expire
+
+                    ClockSkew = TimeSpan.Zero // remove delay of token when expire,
+
+
                 };
             });
 
@@ -92,11 +115,14 @@ internal class Program
             app.UseSwaggerUI();
         }
         app.UseCors();
-    
+
+        app.UseSession();
+        app.UseRouting();
 
         app.UseHttpsRedirection();
 
         app.UseAuthentication();
+
 
         app.UseAuthorization();
 
