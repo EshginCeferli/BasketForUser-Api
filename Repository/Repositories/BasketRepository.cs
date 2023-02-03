@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Repository.Data;
 using Repository.Repositories.Interfaces;
+using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 
 namespace Repository.Repositories
@@ -27,14 +28,13 @@ namespace Repository.Repositories
 
             if (user == null) throw new NullReferenceException();
 
-            var userId = user.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var userId = user.FindFirst(JwtRegisteredClaimNames.Sub)?.Value;
 
             if (userId == null) throw new NullReferenceException();
 
 
             var basket = await _entities
                 .Include(m => m.BasketProducts)
-                .Include(m => m.AppUser)
                 .FirstOrDefaultAsync(m => m.AppUserId == userId);
 
             if (basket == null)
@@ -70,15 +70,14 @@ namespace Repository.Repositories
             _context.SaveChanges();
         }
 
+
         public async Task<List<BasketProduct>> GetBasketProducts()
         {
             var user = _httpContextAccessor.HttpContext.User;
 
             if (user == null) throw new UnauthorizedAccessException();
 
-            var userId = user.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            //var userId = "4c3af473-207b-4030-8431-0796f1286d6a";
-
+            var userId = user.FindFirst(JwtRegisteredClaimNames.Sub)?.Value;
 
             if (userId == null) throw new UnauthorizedAccessException();
 
@@ -90,8 +89,36 @@ namespace Repository.Repositories
 
             var basketProducts = basket.BasketProducts;
 
-
             return basketProducts;
+        }
+
+
+        public async Task DeleteBasket(int id)
+        {
+            var user = _httpContextAccessor.HttpContext.User;
+
+            if (user == null) throw new NullReferenceException();
+
+            var userId = user.FindFirst(JwtRegisteredClaimNames.Sub)?.Value;
+
+            if (userId == null) throw new NullReferenceException();
+
+            var basket = await _entities
+            .Include(m => m.BasketProducts)
+            .FirstOrDefaultAsync(m => m.AppUserId == userId);
+
+            if (basket == null) throw new NullReferenceException();
+
+            var basketProduct = basket.BasketProducts
+            .FirstOrDefault(bp => bp.ProductId == id && bp.BasketId == basket.Id);
+
+            if (basketProduct == null) throw new NullReferenceException();
+
+            basket.BasketProducts.Remove(basketProduct);
+
+            await _context.SaveChangesAsync();
+
+            await _context.SaveChangesAsync();
         }
     }
 }

@@ -22,6 +22,9 @@ namespace Repository.Data
             modelBuilder.ApplyConfiguration(new BasketProductConfiguration());
             base.OnModelCreating(modelBuilder);
 
+            modelBuilder.ApplyConfiguration(new BasketConfiguration());
+            base.OnModelCreating(modelBuilder);
+
         }
 
 

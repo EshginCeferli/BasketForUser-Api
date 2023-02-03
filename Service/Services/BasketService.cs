@@ -20,7 +20,12 @@ namespace Service.Services
             await _repo.AddBasketAsync(id);
         }
 
-        public async Task<List<BasketProductListDto>> GetBasketProducts()
+        public async Task DeleteBasketAsync(int id)
+        {
+            await _repo.DeleteBasket(id);
+        }
+
+        public async Task<List<BasketProductListDto>> GetBasketProductsAsync()
         {
             var basketProducts = await _repo.GetBasketProducts();
             return _mapper.Map<List<BasketProductListDto>>(basketProducts);

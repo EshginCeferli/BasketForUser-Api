@@ -5,6 +5,7 @@ namespace Service.Services.Interfaces
     public interface IBasketService
     {
         Task AddBasketAsync(int id);
-        Task<List<BasketProductListDto>> GetBasketProducts();
+        Task<List<BasketProductListDto>> GetBasketProductsAsync();
+        Task DeleteBasketAsync(int id);
     }
 }

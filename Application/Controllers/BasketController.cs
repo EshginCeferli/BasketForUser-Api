@@ -20,8 +20,7 @@ namespace Application.Controllers
         [Authorize]
         [HttpPost]
         public async Task<IActionResult> AddBasket([Required][FromQuery]int id)
-        {
-            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        {           
             
             await _basketService.AddBasketAsync(id);
             return Ok();
@@ -30,10 +29,18 @@ namespace Application.Controllers
         [Authorize]
         [HttpGet]
         public async Task<IActionResult> GetBasketProducts()
-        {
-            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        {       
 
-            return Ok( await _basketService.GetBasketProducts());
+            return Ok( await _basketService.GetBasketProductsAsync());
         }
+
+        [Authorize]
+        [HttpDelete]
+        public async Task<IActionResult> DeleteBasketProduct([Required][FromQuery] int id)
+        {
+            await _basketService.DeleteBasketAsync(id);
+            return Ok();
+        }
+
     }
 }
