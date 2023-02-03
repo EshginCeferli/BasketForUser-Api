@@ -67,7 +67,7 @@ namespace Service.Services
 
         public async Task<ProductGetDto> GetByIdAsync(int id)
         {
-            var mappedProduct =  _mapper.Map<ProductGetDto>(await _repo.Get(id));
+            var mappedProduct = _mapper.Map<ProductGetDto>(await _repo.Get(id));
 
             return mappedProduct;
         }

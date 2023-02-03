@@ -1,13 +1,7 @@
 ﻿using AutoMapper;
-using Domain.Entities;
 using Repository.Repositories.Interfaces;
 using Service.Services.DTOs.Basket;
 using Service.Services.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Service.Services
 {

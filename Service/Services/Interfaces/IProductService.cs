@@ -1,5 +1,4 @@
-﻿using Domain.Entities;
-using Service.Services.DTOs.Product;
+﻿using Service.Services.DTOs.Product;
 
 namespace Service.Services.Interfaces
 {

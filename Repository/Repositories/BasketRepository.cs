@@ -3,25 +3,20 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Repository.Data;
 using Repository.Repositories.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Repository.Repositories
 {
     public class BasketRepository : Repository<Basket>, IBasketRepository
     {
         private readonly AppDbContext _context;
-        private readonly DbSet<Basket> _entities;      
+        private readonly DbSet<Basket> _entities;
         private readonly IHttpContextAccessor _httpContextAccessor;
 
         public BasketRepository(AppDbContext context, IHttpContextAccessor httpContextAccessor) : base(context)
         {
             _context = context;
-            _entities = _context.Set<Basket>();          
+            _entities = _context.Set<Basket>();
             _httpContextAccessor = httpContextAccessor;
         }
 
@@ -30,11 +25,11 @@ namespace Repository.Repositories
 
             var user = _httpContextAccessor.HttpContext.User;
 
-            if (user == null) throw new UnauthorizedAccessException();
+            if (user == null) throw new NullReferenceException();
 
             var userId = user.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
-            if (userId == null) throw new UnauthorizedAccessException();
+            if (userId == null) throw new NullReferenceException();
 
 
             var basket = await _entities
@@ -89,12 +84,12 @@ namespace Repository.Repositories
 
 
             var basket = await _entities
-                .Include(m => m.BasketProducts)     
+                .Include(m => m.BasketProducts)
                 .ThenInclude(m => m.Product)
                 .FirstOrDefaultAsync(m => m.AppUserId == userId);
 
             var basketProducts = basket.BasketProducts;
-                
+
 
             return basketProducts;
         }

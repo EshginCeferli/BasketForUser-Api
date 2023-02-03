@@ -1,11 +1,4 @@
-﻿using Domain.Entities;
-using Service.Services.DTOs.Basket;
-using Service.Services.DTOs.Product;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Service.Services.DTOs.Basket;
 
 namespace Service.Services.Interfaces
 {
@@ -15,4 +8,3 @@ namespace Service.Services.Interfaces
         Task<List<BasketProductListDto>> GetBasketProducts();
     }
 }
-    

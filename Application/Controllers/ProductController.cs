@@ -1,7 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Service.Services.DTOs.Product;
 using Service.Services.Interfaces;
 using System.ComponentModel.DataAnnotations;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 
 namespace Application.Controllers
 {
@@ -22,9 +25,15 @@ namespace Application.Controllers
             return Ok();
         }
 
+   
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
+            //var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            //var id = User.FindFirst(JwtRegisteredClaimNames.Sub)?.Value;
+
+
             return Ok(await _productService.GetAllAsync());
         }
 
