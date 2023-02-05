@@ -1,4 +1,6 @@
-﻿namespace Service.Services.DTOs.Product
+﻿using Service.Services.DTOs.Category;
+
+namespace Service.Services.DTOs.Product
 {
     public class ProductListDto
     {
@@ -8,6 +10,7 @@
         public decimal Price { get; set; }
         public byte[] Image { get; set; }
         public string CreateDate { get; set; }
-
+        public int CategoryId { get; set; }
+        public CategoryListDto? Category { get; set; }
     }
 }

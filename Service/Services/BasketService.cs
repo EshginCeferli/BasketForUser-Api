@@ -25,9 +25,17 @@ namespace Service.Services
             await _repo.DeleteBasket(id);
         }
 
+        public async Task<int> GetBasketCountAsync()
+        {
+            int basketCount = await _repo.GetBasketCount();
+
+            return basketCount;
+        }
+
         public async Task<List<BasketProductListDto>> GetBasketProductsAsync()
         {
             var basketProducts = await _repo.GetBasketProducts();
+
             return _mapper.Map<List<BasketProductListDto>>(basketProducts);
         }
     }

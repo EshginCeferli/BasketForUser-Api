@@ -104,6 +104,10 @@ internal class Program
 
         builder.Services.AddScoped<IAccountService, AccountService>();
 
+        builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+
+        builder.Services.AddScoped<ICategoryService, CategoryService>();
+
 
 
         var app = builder.Build();

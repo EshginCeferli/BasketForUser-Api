@@ -34,6 +34,14 @@ namespace Application.Controllers
             return Ok( await _basketService.GetBasketProductsAsync());
         }
 
+
+        [Authorize]
+        [HttpGet]
+        public async Task<IActionResult> GetBasketCount()
+        {
+            return Ok(await _basketService.GetBasketCountAsync());
+        }
+
         [Authorize]
         [HttpDelete]
         public async Task<IActionResult> DeleteBasketProduct([Required][FromQuery] int id)
@@ -41,6 +49,5 @@ namespace Application.Controllers
             await _basketService.DeleteBasketAsync(id);
             return Ok();
         }
-
     }
 }

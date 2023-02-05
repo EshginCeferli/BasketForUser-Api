@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Repository.Data;
 using Repository.Repositories.Interfaces;
 using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
+
 
 namespace Repository.Repositories
 {
@@ -119,6 +119,33 @@ namespace Repository.Repositories
             await _context.SaveChangesAsync();
 
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<int> GetBasketCount()
+        {
+            var user = _httpContextAccessor.HttpContext.User;
+
+            if (user == null) throw new UnauthorizedAccessException();
+
+            var userId = user.FindFirst(JwtRegisteredClaimNames.Sub)?.Value;
+
+            if (userId == null) throw new UnauthorizedAccessException();
+
+            var basket = await _entities
+              .Include(m => m.BasketProducts)
+              .ThenInclude(m => m.Product)
+              .FirstOrDefaultAsync(m => m.AppUserId == userId);
+
+            var basketProducts = basket.BasketProducts;
+
+            var uniqeProducts = basketProducts.GroupBy(m => m.Id)
+                .Select(m => m.First())
+                .ToList();
+
+            var uniqueProductCount = uniqeProducts.Count();
+
+
+            return uniqueProductCount;
         }
     }
 }

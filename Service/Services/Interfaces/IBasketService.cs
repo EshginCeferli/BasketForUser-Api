@@ -7,5 +7,6 @@ namespace Service.Services.Interfaces
         Task AddBasketAsync(int id);
         Task<List<BasketProductListDto>> GetBasketProductsAsync();
         Task DeleteBasketAsync(int id);
+        Task<int> GetBasketCountAsync();
     }
 }

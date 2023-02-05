@@ -30,7 +30,7 @@ namespace Service.Services
         public async Task<List<ProductListDto>> GetAllAsync()
         {
 
-            return _mapper.Map<List<ProductListDto>>(await _repo.GetAll());
+            return _mapper.Map<List<ProductListDto>>(await _repo.GetAllProductsWithCategories());
         }
 
         public async Task SoftDeleteAsync(int id)
