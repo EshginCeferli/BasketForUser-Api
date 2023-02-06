@@ -2,15 +2,10 @@
 using Repository.Repositories.Interfaces;
 using Service.Services.DTOs.Category;
 using Service.Services.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Service.Services
 {
-    public class CategoryService :ICategoryService
+    public class CategoryService : ICategoryService
     {
         private readonly ICategoryRepository _repo;
         private readonly IMapper _mapper;

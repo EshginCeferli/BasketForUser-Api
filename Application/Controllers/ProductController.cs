@@ -3,8 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using Service.Services.DTOs.Product;
 using Service.Services.Interfaces;
 using System.ComponentModel.DataAnnotations;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
 
 namespace Application.Controllers
 {
@@ -17,29 +15,27 @@ namespace Application.Controllers
             _productService = productService;
         }
 
-        //[Authorize(Roles ="Admin")]
+      
         [HttpPost]
+        [Authorize(Roles = "SuperAdmin , Admin")]
         public async Task<IActionResult> Create([FromBody] ProductCreateDto product)
         {
             await _productService.Createasync(product);
             return Ok();
         }
 
-   
+
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            //var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-
-            //var id = User.FindFirst(JwtRegisteredClaimNames.Sub)?.Value;
-
-
+          
             return Ok(await _productService.GetAllAsync());
         }
 
 
-        //[Authorize(Roles = "SuperAdmin")]
+       
         [HttpDelete]
+        [Authorize(Roles = "SuperAdmin , Admin")]
         public async Task<IActionResult> Delete([Required] int id)
         {
             try
@@ -54,6 +50,7 @@ namespace Application.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "SuperAdmin , Admin")]
         public async Task<IActionResult> SoftDelete([Required] int id)
         {
             try
@@ -69,8 +66,9 @@ namespace Application.Controllers
         }
 
         //[Authorize(Roles = "Member")]
-        [HttpPut]
+        [HttpPut]        
         [Route("{id}")]
+        [Authorize(Roles = "SuperAdmin , Admin")]
         public async Task<IActionResult> Update([FromRoute][Required] int id, ProductUpdateDto product)
         {
             try

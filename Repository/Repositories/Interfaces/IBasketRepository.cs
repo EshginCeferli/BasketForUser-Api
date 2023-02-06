@@ -8,6 +8,6 @@ namespace Repository.Repositories.Interfaces
         Task AddBasketAsync(int id);
         Task<List<BasketProduct>> GetBasketProducts();
         Task DeleteBasket(int id);
-        Task <int> GetBasketCount();
+        Task<int> GetBasketCount();
     }
 }

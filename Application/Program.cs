@@ -22,7 +22,7 @@ internal class Program
 
         // Add services to the container.
 
-       
+
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
@@ -35,6 +35,16 @@ internal class Program
 
         builder.Services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
 
+        builder.Services.Configure<IdentityOptions>(options =>
+        {
+            options.Password.RequiredLength = 8;
+            options.Password.RequireNonAlphanumeric = true;
+            options.Password.RequireUppercase = true;
+            options.Password.RequireLowercase = true;
+            options.Password.RequireDigit = true;
+            options.User.RequireUniqueEmail = true;
+        });
+
         builder.Services.AddHttpContextAccessor();
 
         //builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
@@ -43,7 +53,7 @@ internal class Program
         builder.Services.AddDistributedMemoryCache();
         builder.Services.AddSession();
         //builder.Services.AddHttpContextAccessor();
-     
+
 
         var authBuilder = builder.Services.AddAuthentication("CookieAuth");
         authBuilder.AddCookie("CookieAuth", options =>

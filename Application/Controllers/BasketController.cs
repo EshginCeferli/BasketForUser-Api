@@ -1,14 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Service.Services.DTOs.Product;
-using Service.Services;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Service.Services.Interfaces;
 using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Authorization;
-using System.Security.Claims;
 
 namespace Application.Controllers
 {
-    public class BasketController :AppController
+    public class BasketController : AppController
     {
         private readonly IBasketService _basketService;
 
@@ -19,9 +16,9 @@ namespace Application.Controllers
 
         [Authorize]
         [HttpPost]
-        public async Task<IActionResult> AddBasket([Required][FromQuery]int id)
-        {           
-            
+        public async Task<IActionResult> AddBasket([Required][FromQuery] int id)
+        {
+
             await _basketService.AddBasketAsync(id);
             return Ok();
         }
@@ -29,9 +26,9 @@ namespace Application.Controllers
         [Authorize]
         [HttpGet]
         public async Task<IActionResult> GetBasketProducts()
-        {       
+        {
 
-            return Ok( await _basketService.GetBasketProductsAsync());
+            return Ok(await _basketService.GetBasketProductsAsync());
         }
 
 
