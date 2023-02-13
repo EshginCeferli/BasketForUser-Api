@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ZlyfmRI+v1VxKuuaQruL6qlLaKg/TU1t3rX41IbMIUgpJVhvc40L/z9lUluhP1KhNoEYTWuOd4Aoru63reFq3g==",
+  "dgSpecHash": "Jf3MSaC/aNaqb9gJi9GF44HPhOWL07YwgL+MokRxxvdZQfPz0sazUVb4Okq4RwuEa84Sg3Fl6S3Gyj83qvN7Kw==",
   "success": true,
-  "projectFilePath": "D:\\İş masası\\Api\\Api-Onion-Intro\\Application\\Domain\\Domain.csproj",
+  "projectFilePath": "C:\\Users\\ESQIN\\Desktop\\Clone Projects\\Task1-Api\\Domain\\Domain.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ESQIN\\.nuget\\packages\\automapper\\12.0.0\\automapper.12.0.0.nupkg.sha512",
     "C:\\Users\\ESQIN\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.0\\automapper.extensions.microsoft.dependencyinjection.12.0.0.nupkg.sha512",

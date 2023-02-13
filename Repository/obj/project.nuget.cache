@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "xsA34PLyro3NBfEoWU7iLwyjLjM2U3qCXqOzM/luB0o4VAEltx5x4Yy8DbAFraanwsCEMtpksN9rDCt9ZZ4b0Q==",
+  "dgSpecHash": "HBihZso5DhXrAoDGczFgy49kpRvZ1dQ+r11Bny+Hra+ef18GGaD61ZkUI2Mxemgtc0yUNKejl8xaDC3dTKopnQ==",
   "success": true,
-  "projectFilePath": "D:\\İş masası\\Api\\Api-Onion-Intro\\Application\\Repository\\Repository.csproj",
+  "projectFilePath": "C:\\Users\\ESQIN\\Desktop\\Clone Projects\\Task1-Api\\Repository\\Repository.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ESQIN\\.nuget\\packages\\automapper\\12.0.0\\automapper.12.0.0.nupkg.sha512",
     "C:\\Users\\ESQIN\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.0\\automapper.extensions.microsoft.dependencyinjection.12.0.0.nupkg.sha512",

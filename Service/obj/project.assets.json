@@ -6911,11 +6911,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\İş masası\\Api\\Api-Onion-Intro\\Application\\Service\\Service.csproj",
+      "projectUniqueName": "C:\\Users\\ESQIN\\Desktop\\Clone Projects\\Task1-Api\\Service\\Service.csproj",
       "projectName": "Service",
-      "projectPath": "D:\\İş masası\\Api\\Api-Onion-Intro\\Application\\Service\\Service.csproj",
+      "projectPath": "C:\\Users\\ESQIN\\Desktop\\Clone Projects\\Task1-Api\\Service\\Service.csproj",
       "packagesPath": "C:\\Users\\ESQIN\\.nuget\\packages\\",
-      "outputPath": "D:\\İş masası\\Api\\Api-Onion-Intro\\Application\\Service\\obj\\",
+      "outputPath": "C:\\Users\\ESQIN\\Desktop\\Clone Projects\\Task1-Api\\Service\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -6936,8 +6936,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "D:\\İş masası\\Api\\Api-Onion-Intro\\Application\\Repository\\Repository.csproj": {
-              "projectPath": "D:\\İş masası\\Api\\Api-Onion-Intro\\Application\\Repository\\Repository.csproj"
+            "C:\\Users\\ESQIN\\Desktop\\Clone Projects\\Task1-Api\\Repository\\Repository.csproj": {
+              "projectPath": "C:\\Users\\ESQIN\\Desktop\\Clone Projects\\Task1-Api\\Repository\\Repository.csproj"
             }
           }
         }
